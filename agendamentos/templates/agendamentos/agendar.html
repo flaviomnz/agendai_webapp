@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento de Barbearia</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'agendamentos/css/styles.css' %}">
+</head>
+<body>
+    <h1>Agendamento de Serviço</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.nome.label }} {{ form.nome }}<br>
+        
+        <label for="data">Data:</label>
+        <select name="data" id="data">
+            {% for dia in dias_disponiveis %}
+                <option value="{{ dia.data }}">{{ dia.data }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="horario">Horário:</label>
+        <select name="horario" id="horario">
+            {% for horario in horarios %}
+                <option value="{{ horario.id }}">{{ horario.horario }}</option>
+            {% endfor %}
+        </select><br>
+
+        <button type="submit">Agendar</button>
+    </form>
+</body>
+</html>

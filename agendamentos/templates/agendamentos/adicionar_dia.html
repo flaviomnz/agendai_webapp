@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Dia Disponível</title>
+</head>
+<body>
+    <h1>Adicionar Dia Disponível</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Adicionar Dia</button>
+    </form>
+
+    <h2>Dias Disponíveis</h2>
+    <ul>
+        {% for dia in dias_disponiveis %}
+            <li>{{ dia.data }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
