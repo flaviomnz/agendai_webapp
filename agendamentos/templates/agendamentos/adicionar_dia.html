@@ -8,7 +8,7 @@
     <h1>Adicionar Dia Disponível</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.as_p }}  <!-- Renderiza todos os campos do formulário -->
         <button type="submit">Adicionar Dia</button>
     </form>
 

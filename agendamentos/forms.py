@@ -6,14 +6,17 @@ from .models import Agendamento, DiaDisponivel
 class AgendamentoForm(forms.ModelForm):
     class Meta:
         model = Agendamento
-        fields = ['nome', 'horario']  # Os campos que você deseja incluir no formulário
+        fields = ['nome', 'data', 'horario']
         widgets = {
-            'data': forms.SelectDateWidget(),  # Para um seletor de data
+            'data': forms.DateInput(attrs={'type': 'date'}),  # Isso garante que o campo será exibido como um seletor de data
         }
         
 class DiaDisponivelForm(forms.ModelForm):
     class Meta:
         model = DiaDisponivel
         fields = ['data']
+        widgets = {
+            'data': forms.DateInput(attrs={'type': 'date'}),  # Isso garante que o campo será exibido como um seletor de data
+        }
 
 
