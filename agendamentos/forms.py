@@ -1,7 +1,7 @@
 # agendamentos/forms.py
 
 from django import forms
-from .models import Agendamento, DiaDisponivel
+from .models import Agendamento, DiaDisponivel, Servico
 
 class AgendamentoForm(forms.ModelForm):
     class Meta:
@@ -18,5 +18,11 @@ class DiaDisponivelForm(forms.ModelForm):
         widgets = {
             'data': forms.DateInput(attrs={'type': 'date'}),  # Isso garante que o campo será exibido como um seletor de data
         }
+
+class ServicoForm(forms.ModelForm):
+    class Meta:
+        model = Servico
+        fields = ['nome', 'valor']
+
 
 

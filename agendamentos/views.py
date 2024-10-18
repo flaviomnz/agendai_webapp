@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Agendamento, Horario, DiaDisponivel
-from .forms import AgendamentoForm, DiaDisponivelForm
+from .models import Agendamento, Horario, DiaDisponivel, Servico
+from .forms import AgendamentoForm, DiaDisponivelForm, ServicoForm
 
 
 def agendar(request):
@@ -39,3 +39,31 @@ def adicionar_dia_disponivel(request):
 
     dias_disponiveis = DiaDisponivel.objects.all()  # Para exibir dias já cadastrados
     return render(request, 'agendamentos/adicionar_dia.html', {'form': form, 'dias_disponiveis': dias_disponiveis})
+    
+def listar_servicos(request):
+    servicos = Servico.objects.all()
+    return render(request, 'agendamentos/listar_servicos.html', {'servicos': servicos})
+
+def adicionar_servico(request):
+    if request.method == 'POST':
+        form = ServicoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_servicos')  # Redireciona para a lista de serviços
+    else:
+        form = ServicoForm()
+    
+    return render(request, 'agendamentos/adicionar_servico.html', {'form': form})
+
+def editar_servico(request, pk):
+    servico = Servico.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = ServicoForm(request.POST, instance=servico)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_servicos')  # Redireciona para a lista de serviços
+    else:
+        form = ServicoForm(instance=servico)
+
+    return render(request, 'agendamentos/editar_servico.html', {'form': form})
+    
