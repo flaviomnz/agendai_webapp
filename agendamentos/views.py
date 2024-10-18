@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Agendamento, Horario, DiaDisponivel
 from .forms import AgendamentoForm, DiaDisponivelForm
+
+
 def agendar(request):
     if request.method == 'POST':
         form = AgendamentoForm(request.POST)
